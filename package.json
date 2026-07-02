@@ -1,0 +1,49 @@
+{
+  "name": "app-market-mcp",
+  "version": "0.1.0",
+  "description": "App-store market intelligence for AI agents over MCP: competitor sets, studios, share-of-search, rank movement. Public endpoints, no API keys.",
+  "license": "MIT",
+  "author": "Emir Yaman Sivrikaya (https://github.com/EYamanS)",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EYamanS/app-market-mcp.git"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "app-store",
+    "aso",
+    "market-intelligence",
+    "itunes-search",
+    "keyword-rankings",
+    "competitor-analysis"
+  ],
+  "type": "module",
+  "bin": {
+    "app-market-mcp": "dist/index.js"
+  },
+  "main": "dist/index.js",
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.json && node -e \"require('fs').chmodSync('dist/index.js', 0o755)\"",
+    "prepare": "npm run build",
+    "test": "vitest run",
+    "smoke": "node scripts/smoke.mjs"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "zod": "^3.24.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.0"
+  }
+}
