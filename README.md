@@ -1,5 +1,7 @@
 # app-market-mcp
 
+[![Buy me a coffee](https://img.shields.io/badge/%E2%98%95%20Buy%20me%20a%20coffee-support-FF813F)](https://buy.polar.sh/polar_cl_v4ZIuYffdbN9E9iVLmlHh1W5sxAmxvqNVqIn81048FX)
+
 **ASO tools tell you about your app. This one tells you about the market.**
 
 An MCP server for App Store market intelligence: competitor sets, studios, share-of-search,
@@ -139,6 +141,12 @@ npm run smoke   # boots the server and runs one live search
 
 PRs welcome — especially additional storefront quirks, new market-level tools, and
 Google Play groundwork.
+
+## Support
+
+Built this in the open. If it saved you time, a one-off tip keeps it maintained:
+
+[![Buy me a coffee](https://img.shields.io/badge/%E2%98%95%20Buy%20me%20a%20coffee-support%20this%20project-FF813F?style=for-the-badge)](https://buy.polar.sh/polar_cl_v4ZIuYffdbN9E9iVLmlHh1W5sxAmxvqNVqIn81048FX)
 
 ## License
 
