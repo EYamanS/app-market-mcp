@@ -151,3 +151,7 @@ Built this in the open. If it saved you time, a one-off tip keeps it maintained:
 ## License
 
 MIT
+
+---
+
+<sub><b>Keywords:</b> App Store market intelligence · ASO tools · app store competitor analysis · share of search · app rank tracking · App Store API (no key) · mobile app market research · MCP app-store data for AI agents.</sub>
