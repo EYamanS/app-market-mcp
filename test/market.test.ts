@@ -1,6 +1,7 @@
 import { describe, it, expect } from "vitest";
 import { studioBoard, marketStats, probeTerms, scoreCompetitors } from "../src/market.js";
 import type { AppInfo } from "../src/normalize.js";
+import { screenshotProfile } from "../src/shared.js";
 
 const app = (over: Partial<AppInfo>): AppInfo => ({
   id: "0",
@@ -90,5 +91,42 @@ describe("scoreCompetitors", () => {
     expect(ids[0]).toBe("r");
     expect(scored[0].matched_probes).toEqual(["t1", "t2"]);
     expect(scored[0].score).toBeGreaterThan(scored[1].score);
+  });
+});
+
+describe("screenshotProfile", () => {
+  it("returns App Store screenshot URLs with source metadata", () => {
+    const profile = screenshotProfile(
+      {
+        wrapperType: "software",
+        trackId: 1438388363,
+        trackName: "Habit Tracker",
+        sellerName: "Inner Grow Limited",
+        bundleId: "com.davetech.habit",
+        price: 0,
+        version: "2.14.21",
+        currentVersionReleaseDate: "2026-08-05T12:00:00Z",
+        trackViewUrl: "https://apps.apple.com/us/app/habit-tracker/id1438388363?uo=4",
+        screenshotUrls: ["https://example.com/iphone-1.png", 42],
+        ipadScreenshotUrls: ["https://example.com/ipad-1.png"],
+        appletvScreenshotUrls: null,
+      },
+      "US",
+    );
+
+    expect(profile).toMatchObject({
+      id: "1438388363",
+      bundle_id: "com.davetech.habit",
+      name: "Habit Tracker",
+      country: "US",
+      version: "2.14.21",
+      updated: "2026-08-05",
+      url: "https://apps.apple.com/us/app/habit-tracker/id1438388363?uo=4",
+      source: "apple_itunes_lookup",
+      screenshot_urls: ["https://example.com/iphone-1.png"],
+      ipad_screenshot_urls: ["https://example.com/ipad-1.png"],
+      appletv_screenshot_urls: [],
+    });
+    expect(profile.captured_at).toEqual(expect.any(String));
   });
 });

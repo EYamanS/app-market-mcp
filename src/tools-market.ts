@@ -3,7 +3,16 @@ import type { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { searchApps, lookup, topChart, normCountry } from "./itunes.js";
 import { isApp, normApp, rowOf } from "./normalize.js";
 import { studioBoard, marketStats } from "./market.js";
-import { ok, fail, guard, progress, fullProfile, resolveApps, findRank } from "./shared.js";
+import {
+  ok,
+  fail,
+  guard,
+  progress,
+  fullProfile,
+  screenshotProfile,
+  resolveApps,
+  findRank,
+} from "./shared.js";
 
 export function registerMarketTools(server: McpServer): void {
   server.registerTool(
@@ -54,6 +63,33 @@ export function registerMarketTools(server: McpServer): void {
         return fail(`No app found for ${id ?? bundle_id} in the ${c} storefront.`);
       }
       return ok(fullProfile(results[0]));
+    }),
+  );
+
+  server.registerTool(
+    "get_app_screenshots",
+    {
+      title: "Get App Store screenshot URLs",
+      description:
+        "Public App Store screenshot URLs for one app from Apple's lookup endpoint. " +
+        "Use for lightweight design-reference discovery; screenshots are marketing " +
+        "assets, not complete in-app flows.",
+      inputSchema: {
+        id: z.string().optional().describe("Apple track id, e.g. 1438388363"),
+        bundle_id: z.string().optional().describe("e.g. com.example.app"),
+        country: z.string().default("US"),
+      },
+    },
+    guard(async ({ id, bundle_id, country }) => {
+      if (!id && !bundle_id) return fail("Provide id or bundle_id.");
+      const c = normCountry(country);
+      const results = (
+        await lookup({ id: id || undefined, bundleId: bundle_id || undefined, country: c })
+      ).filter(isApp);
+      if (!results.length) {
+        return fail(`No app found for ${id ?? bundle_id} in the ${c} storefront.`);
+      }
+      return ok(screenshotProfile(results[0], c));
     }),
   );
 
