@@ -58,6 +58,7 @@ Any MCP client with stdio transport works (Cursor, Windsurf, etc.).
 |---|---|
 | `search_apps` | Raw App Store search results for a term, in rank order |
 | `app_profile` | Full metadata for one app (by track id or bundle id) |
+| `get_app_screenshots` | Public App Store screenshot URLs for one app, with storefront/version/source metadata |
 | `share_of_search` | Top-50 leaderboard for a keyword + which studios hold the slots; flags your app and rivals |
 | `keyword_matrix` | The grid: N keywords × M apps, who ranks where (≤10×10) |
 | `market_map` | One-call landscape: top apps, dominant studios, free/paid mix, concentration, median age |

@@ -58,6 +58,29 @@ export function fullProfile(r: any) {
   };
 }
 
+const urlArray = (value: unknown): string[] =>
+  Array.isArray(value) ? value.filter((item): item is string => typeof item === "string") : [];
+
+/** Screenshot URLs for design-reference workflows. */
+export function screenshotProfile(r: any, country: string) {
+  const app = normApp(r);
+  return {
+    id: app.id,
+    bundle_id: app.bundle_id,
+    name: app.name,
+    studio: app.studio,
+    country,
+    version: app.version,
+    updated: app.updated,
+    url: app.url,
+    source: "apple_itunes_lookup",
+    captured_at: new Date().toISOString(),
+    screenshot_urls: urlArray(r.screenshotUrls),
+    ipad_screenshot_urls: urlArray(r.ipadScreenshotUrls),
+    appletv_screenshot_urls: urlArray(r.appletvScreenshotUrls),
+  };
+}
+
 /** Resolve a batch of track ids to names; throws listing any that don't exist. */
 export async function resolveApps(
   ids: string[],
